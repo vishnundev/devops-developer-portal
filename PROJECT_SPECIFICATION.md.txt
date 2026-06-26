@@ -1,0 +1,592 @@
+PROJECT NAME
+
+DevOps Developer Portal for Amazon Seller Dashboard
+
+OBJECTIVE
+
+Build a full-stack enterprise DevOps dashboard that monitors and manages the existing Amazon Seller Dashboard backend application.
+
+This is NOT a Kubernetes platform.
+
+This is NOT a microservices architecture.
+
+This is NOT an actual cloud deployment platform.
+
+This is a centralized DevOps portal that monitors backend modules of the Amazon Seller Dashboard application.
+
+The Amazon Seller Dashboard backend already exists.
+
+Existing modules:
+
+- Authentication
+- Product
+- Inventory
+- Orders
+- Supplier
+- Revenue
+- Notifications
+
+These modules already have APIs.
+
+The DevOps Portal should consume these APIs and monitor them.
+
+----------------------------------
+
+TECH STACK
+
+Backend
+
+Java 21
+
+Spring Boot 3
+
+Spring Security
+
+JWT
+
+Spring Data JPA
+
+Mysql
+
+Spring Validation
+
+Global Exception Handling
+
+DTO pattern
+
+Lombok
+
+MapStruct (optional)
+
+----------------------------------
+
+Frontend
+
+React
+
+Vite
+
+React Router
+
+Axios
+
+Context API
+
+Simple clean UI
+
+No Tailwind.
+
+Use CSS modules or plain CSS.
+
+Do not overdesign UI.
+
+Focus on functionality.
+
+----------------------------------
+
+DevOps
+
+Docker
+
+Docker Compose
+
+GitHub Actions
+
+Prometheus
+
+Grafana
+
+Spring Boot Actuator
+
+Micrometer
+
+----------------------------------
+
+ARCHITECTURE
+
+React
+
+↓
+
+Spring Boot API
+
+↓
+
+MySql
+
+↓
+
+Amazon Dashboard Modules
+
+↓
+
+Prometheus
+
+↓
+
+Grafana
+
+↓
+
+Docker
+
+----------------------------------
+
+ROLES
+
+ADMIN
+
+DEVELOPER
+
+VIEWER
+
+----------------------------------
+
+ROLE PERMISSIONS
+
+ADMIN
+
+- Create services
+- Delete services
+- Restart services
+- View metrics
+- View logs
+- View deployment history
+- Manage users
+
+DEVELOPER
+
+- View services
+- Restart services
+- View metrics
+- View logs
+- View deployment history
+
+VIEWER
+
+- View services
+- View metrics only
+
+----------------------------------
+
+DATABASE TABLES
+
+users
+
+id
+
+name
+
+email
+
+password
+
+role
+
+created_at
+
+----------------------------------
+
+services
+
+id
+
+name
+
+description
+
+module_name
+
+status
+
+version
+
+port
+
+created_at
+
+----------------------------------
+
+environments
+
+id
+
+name
+
+development
+
+testing
+
+staging
+
+production
+
+----------------------------------
+
+deployments
+
+id
+
+service_id
+
+environment_id
+
+version
+
+deployment_status
+
+deployment_time
+
+----------------------------------
+
+metrics
+
+id
+
+service_id
+
+cpu_usage
+
+memory_usage
+
+request_count
+
+error_count
+
+uptime
+
+captured_at
+
+----------------------------------
+
+notifications
+
+id
+
+service_id
+
+message
+
+severity
+
+created_at
+
+is_read
+
+----------------------------------
+
+FEATURES
+
+1.
+
+JWT Authentication
+
+Register
+
+Login
+
+Logout
+
+Role based access
+
+----------------------------------
+
+2.
+
+Dashboard
+
+Cards:
+
+Total Services
+
+Running Services
+
+Stopped Services
+
+CPU Usage
+
+Memory Usage
+
+Errors Today
+
+Deployments Today
+
+----------------------------------
+
+3.
+
+Service Management
+
+List all services
+
+Create service
+
+Update service
+
+Delete service
+
+View service details
+
+Change status
+
+Restart service
+
+Start service
+
+Stop service
+
+----------------------------------
+
+4.
+
+Environment Management
+
+Development
+
+Testing
+
+Staging
+
+Production
+
+Assign services to environments
+
+----------------------------------
+
+5.
+
+Deployment History
+
+View deployment history
+
+View deployment status
+
+View version history
+
+Search deployments
+
+Filter by environment
+
+----------------------------------
+
+6.
+
+Monitoring
+
+Use Spring Boot Actuator
+
+Use Micrometer
+
+Expose:
+
+CPU
+
+Memory
+
+Requests
+
+Errors
+
+Uptime
+
+Store snapshots into database every minute
+
+----------------------------------
+
+7.
+
+Notifications
+
+Generate notifications:
+
+Service Down
+
+High CPU
+
+High Memory
+
+Deployment Failed
+
+Deployment Success
+
+----------------------------------
+
+8.
+
+Logs
+
+Simple simulated logs.
+
+Example:
+
+Inventory Service started
+
+Inventory Service restarted
+
+Revenue Service failed
+
+Do not build a real ELK stack.
+
+----------------------------------
+
+DOCKER
+
+Provide:
+
+Dockerfile
+
+docker-compose.yml
+
+Containers:
+
+springboot-app
+
+Mysql
+
+prometheus
+
+grafana
+
+----------------------------------
+
+PROMETHEUS
+
+Configure Prometheus.
+
+Scrape Spring Boot Actuator metrics.
+
+----------------------------------
+
+GRAFANA
+
+Configure dashboards for:
+
+CPU
+
+Memory
+
+Requests
+
+Errors
+
+Uptime
+
+----------------------------------
+
+GITHUB ACTIONS
+
+On push to main:
+
+Run Maven tests
+
+Build jar
+
+Build Docker image
+
+----------------------------------
+
+API REQUIREMENTS
+
+Every controller must have:
+
+Request DTO
+
+Response DTO
+
+Validation
+
+Pagination
+
+Global Exception Handling
+
+Consistent response structure
+
+----------------------------------
+
+RESPONSE FORMAT
+
+{
+
+success:true,
+
+message:"",
+
+data:{}
+
+}
+
+----------------------------------
+
+FRONTEND PAGES
+
+Login
+
+Dashboard
+
+Services
+
+Service Details
+
+Deployments
+
+Metrics
+
+Notifications
+
+Users
+
+Profile
+
+----------------------------------
+
+CODING RULES
+
+Do not create microservices.
+
+Do not use Kubernetes.
+
+Do not use RabbitMQ.
+
+Do not use Kafka.
+
+Do not use Redis.
+
+Do not use AWS.
+
+Do not use Terraform.
+
+Do not use Tailwind.
+
+Do not create unnecessary animations.
+
+Use simple React UI.
+
+Backend architecture must be clean and interview-ready.
+
+Use package structure:
+
+config
+
+controller
+
+dto
+
+entity
+
+repository
+
+service
+
+security
+
+exception
+
+scheduler
+
+util
+
+----------------------------------
+
+DELIVERABLE
+
+Build a production-quality enterprise DevOps Developer Portal that manages and monitors the existing Amazon Seller Dashboard backend modules.
